@@ -1,4 +1,6 @@
-﻿using EFCoreMovies.Entities;
+﻿using System.Reflection;
+using EFCoreMovies.Entities;
+using ESCoreMoviesDb.Entities.Seeding;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreMovies
@@ -19,28 +21,15 @@ namespace EFCoreMovies
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Actor>().Property(p => p.Name).IsRequired();
-            modelBuilder.Entity<Actor>().Property(p => p.Biography).HasColumnType("nvarchar(max)");
-
-            modelBuilder.Entity<Cinema>().Property(p => p.Name).IsRequired();
-
-            modelBuilder.Entity<CinemaHall>().Property(p => p.Cost).HasPrecision(9, 2);
-            modelBuilder.Entity<CinemaHall>().Property(p => p.CinemaHallType).HasDefaultValue(CinemaHallType.TwoDimensions);
-
-            modelBuilder.Entity<Movie>().Property(p => p.Title).HasMaxLength(250).IsRequired();
-            modelBuilder.Entity<Movie>().Property(p => p.PosterUrl).HasMaxLength(500).IsRequired().IsUnicode(false);
-
-            modelBuilder.Entity<CinemaOffer>().Property(p => p.DiscountPercentage).HasPrecision(5, 2);
-
-            modelBuilder.Entity<MovieActor>().HasKey(p => new{p.MovieId, p.ActorId});
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            M3Seeding.Seed(modelBuilder);
 
 
 
 
 
-
-
+            //modelBuilder.Entity<CinemaHall>().Property(p => p.Cost).HasPrecision(9, 2);
+            //modelBuilder.Entity<CinemaHall>().Property(p => p.CinemaHallType).HasDefaultValue(CinemaHallType.TwoDimensions);
         }
 
         public DbSet<Genre> Genres { get; set; }

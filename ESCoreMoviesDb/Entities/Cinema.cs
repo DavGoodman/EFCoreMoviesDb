@@ -13,6 +13,7 @@ namespace EFCoreMovies.Entities
 
         // one-to-one relationship, adds foreign key TO CinemaOffer, not this entity, navigation property
         public CinemaOffer CinemaOffer { get; set; }
+
         // one to many relationship, column values do not have to be unique
         public List<CinemaHall> CinemaHalls { get; set; }
 

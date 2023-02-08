@@ -7,10 +7,8 @@ namespace EFCoreMovies.Entities
     public class Genre
     {
         public int Id { get; set; }
-        //[StringLength(maximumLength:150)]
-        [Required]
-        //[Column("GenreName")] // naming column
         public string Name { get; set; }
+        public bool IsDeleted { get; set; }
         public List<Movie> Movies { get; set; }
 
     }

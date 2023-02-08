@@ -4,6 +4,7 @@ using EFCoreMovies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,11 @@ using NetTopologySuite.Geometries;
 namespace ESCoreMoviesDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230207120014_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,51 +108,51 @@ namespace ESCoreMoviesDb.Migrations
                             Id = 1,
                             Biography = "Thomas Stanley Holland (born 1 June 1996) is an English actor. He is recipient of several accolades, including the 2017 BAFTA Rising Star Award. Holland began his acting career as a child actor on the West End stage in Billy Elliot the Musical at the Victoria Palace Theatre in 2008, playing a supporting part",
                             DateOfBirth = new DateTime(1996, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tom Holland"
+                            Name = "TSystem.Char[] HSystem.Char[]"
                         },
                         new
                         {
                             Id = 2,
                             Biography = "Samuel Leroy Jackson (born December 21, 1948) is an American actor and producer. One of the most widely recognized actors of his generation, the films in which he has appeared have collectively grossed over $27 billion worldwide, making him the highest-grossing actor of all time (excluding cameo appearances and voice roles).",
                             DateOfBirth = new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Samuel L. Jackson"
+                            Name = "SSystem.Char[] LSystem.Char[] JSystem.Char[]"
                         },
                         new
                         {
                             Id = 3,
                             Biography = "Robert John Downey Jr. (born April 4, 1965) is an American actor and producer. His career has been characterized by critical and popular success in his youth, followed by a period of substance abuse and legal troubles, before a resurgence of commercial success later in his career.",
                             DateOfBirth = new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Robert Downey Jr."
+                            Name = "RSystem.Char[] DSystem.Char[] JSystem.Char[]"
                         },
                         new
                         {
                             Id = 4,
                             DateOfBirth = new DateTime(1981, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chris Evans"
+                            Name = "CSystem.Char[] ESystem.Char[]"
                         },
                         new
                         {
                             Id = 5,
                             DateOfBirth = new DateTime(1972, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dwayne Johnson"
+                            Name = "DSystem.Char[] JSystem.Char[]"
                         },
                         new
                         {
                             Id = 6,
                             DateOfBirth = new DateTime(2000, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Auli'i Cravalho"
+                            Name = "ASystem.Char[] CSystem.Char[]"
                         },
                         new
                         {
                             Id = 7,
                             DateOfBirth = new DateTime(1984, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Scarlett Johansson"
+                            Name = "SSystem.Char[] JSystem.Char[]"
                         },
                         new
                         {
                             Id = 8,
                             DateOfBirth = new DateTime(1964, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Keanu Reeves"
+                            Name = "KSystem.Char[] RSystem.Char[]"
                         });
                 });
 
@@ -342,9 +345,6 @@ namespace ESCoreMoviesDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -358,31 +358,26 @@ namespace ESCoreMoviesDb.Migrations
                         new
                         {
                             Id = 1,
-                            IsDeleted = false,
                             Name = "Action"
                         },
                         new
                         {
                             Id = 2,
-                            IsDeleted = false,
                             Name = "Animation"
                         },
                         new
                         {
                             Id = 3,
-                            IsDeleted = false,
                             Name = "Comedy"
                         },
                         new
                         {
                             Id = 4,
-                            IsDeleted = false,
                             Name = "ScienceFiction"
                         },
                         new
                         {
                             Id = 5,
-                            IsDeleted = false,
                             Name = "Drama"
                         });
                 });

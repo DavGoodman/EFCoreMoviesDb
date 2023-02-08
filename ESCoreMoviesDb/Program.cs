@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using EFCoreMovies;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlServer("name=DefaultConnection",
-        sqlServer => sqlServer.UseNetTopologySuite()));
+
+
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    //options.UseLazyLoadingProxies();
+    options.UseSqlServer("name=DefaultConnection",
+        sqlServer => sqlServer.UseNetTopologySuite());
+});
+
+builder.Services.AddAutoMapper(typeof(Program));
+
 
 var app = builder.Build();
 

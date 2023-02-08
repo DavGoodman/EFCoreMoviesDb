@@ -4,6 +4,7 @@ using EFCoreMovies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,11 @@ using NetTopologySuite.Geometries;
 namespace ESCoreMoviesDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230204135828_moviePosterNotNeeded")]
+    partial class moviePosterNotNeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,9 +345,6 @@ namespace ESCoreMoviesDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -358,31 +358,26 @@ namespace ESCoreMoviesDb.Migrations
                         new
                         {
                             Id = 1,
-                            IsDeleted = false,
                             Name = "Action"
                         },
                         new
                         {
                             Id = 2,
-                            IsDeleted = false,
                             Name = "Animation"
                         },
                         new
                         {
                             Id = 3,
-                            IsDeleted = false,
                             Name = "Comedy"
                         },
                         new
                         {
                             Id = 4,
-                            IsDeleted = false,
                             Name = "ScienceFiction"
                         },
                         new
                         {
                             Id = 5,
-                            IsDeleted = false,
                             Name = "Drama"
                         });
                 });

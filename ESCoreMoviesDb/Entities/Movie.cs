@@ -8,6 +8,7 @@
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
         public List<Genre> Genres { get; set; }
+        public List<CinemaHall> CinemaHalls { get; set; }
         public List<MovieActor> MoviesActors { get; set; }
         
     }
