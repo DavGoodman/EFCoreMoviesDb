@@ -12,7 +12,7 @@ namespace ESCoreMoviesDb.Entities.Configurations
 
             builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.Biography).HasColumnType("nvarchar(max)").IsRequired(false);
-
+            builder.Ignore(p => p.Age);
             //builder.Property(p => p.Name).HasField("_name");
         }
 

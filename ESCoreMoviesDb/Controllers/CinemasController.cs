@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using EFCoreMovies;
 using EFCoreMovies.DTOs;
 using EFCoreMovies.Entities;
+using EFCoreMovies.Entities.Keyless;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
@@ -27,6 +28,12 @@ namespace ESCoreMoviesDb.Controllers
         public async Task<IEnumerable<CinemaDTO>> Get()
         {
             return await context.Cinemas.ProjectTo<CinemaDTO>(mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        [HttpGet("WithoutLocation")]
+        public async Task<IEnumerable<CinemaWithoutLocation>> GetWithoutLocation()
+        {
+            return await context.Set<CinemaWithoutLocation>().ToListAsync();
         }
 
         [HttpGet("closeToMe")]
@@ -89,11 +96,13 @@ namespace ESCoreMoviesDb.Controllers
                     new CinemaHall()
                     {
                         Cost = 200,
+                        Currency = Currency.DominicanPeso,
                         CinemaHallType = CinemaHallType.TwoDimensions
                     },
                     new CinemaHall()
                     {
                         Cost = 250,
+                        Currency = Currency.USDollar,
                         CinemaHallType = CinemaHallType.ThreeDimensions
                     }
                 }

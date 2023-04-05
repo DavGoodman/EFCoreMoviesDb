@@ -4,6 +4,7 @@ using EFCoreMovies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,11 @@ using NetTopologySuite.Geometries;
 namespace ESCoreMoviesDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230220205830_enumToString")]
+    partial class enumToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,11 +97,6 @@ namespace ESCoreMoviesDb.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("PictureURL")
-                        .HasMaxLength(150)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(150)");
 
                     b.HasKey("Id");
 
@@ -228,10 +226,6 @@ namespace ESCoreMoviesDb.Migrations
                         .HasPrecision(9, 2)
                         .HasColumnType("decimal(9,2)");
 
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CinemaId");
@@ -244,64 +238,56 @@ namespace ESCoreMoviesDb.Migrations
                             Id = 5,
                             CinemaHallType = "TwoDimensions",
                             CinemaId = 3,
-                            Cost = 250m,
-                            Currency = ""
+                            Cost = 250m
                         },
                         new
                         {
                             Id = 6,
                             CinemaHallType = "ThreeDimensions",
                             CinemaId = 3,
-                            Cost = 330m,
-                            Currency = ""
+                            Cost = 330m
                         },
                         new
                         {
                             Id = 7,
                             CinemaHallType = "CXC",
                             CinemaId = 3,
-                            Cost = 450m,
-                            Currency = ""
+                            Cost = 450m
                         },
                         new
                         {
                             Id = 8,
                             CinemaHallType = "TwoDimensions",
                             CinemaId = 4,
-                            Cost = 250m,
-                            Currency = ""
+                            Cost = 250m
                         },
                         new
                         {
                             Id = 1,
                             CinemaHallType = "TwoDimensions",
                             CinemaId = 1,
-                            Cost = 220m,
-                            Currency = ""
+                            Cost = 220m
                         },
                         new
                         {
                             Id = 2,
                             CinemaHallType = "ThreeDimensions",
                             CinemaId = 1,
-                            Cost = 320m,
-                            Currency = ""
+                            Cost = 320m
                         },
                         new
                         {
                             Id = 3,
                             CinemaHallType = "TwoDimensions",
                             CinemaId = 2,
-                            Cost = 200m,
-                            Currency = ""
+                            Cost = 200m
                         },
                         new
                         {
                             Id = 4,
                             CinemaHallType = "ThreeDimensions",
                             CinemaId = 2,
-                            Cost = 290m,
-                            Currency = ""
+                            Cost = 290m
                         });
                 });
 
@@ -360,11 +346,6 @@ namespace ESCoreMoviesDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GetDate()");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -412,51 +393,6 @@ namespace ESCoreMoviesDb.Migrations
                             IsDeleted = false,
                             Name = "Drama"
                         });
-                });
-
-            modelBuilder.Entity("EFCoreMovies.Entities.Keyless.CinemaWithoutLocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable((string)null);
-
-                    b.ToView(null, (string)null);
-
-                    b.ToSqlQuery("Select Id, Name FROM Cinemas");
-                });
-
-            modelBuilder.Entity("EFCoreMovies.Entities.Keyless.MovieWithCounts", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmountActors")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmountCinemas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmountGenres")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("MoviesWithCounts", (string)null);
                 });
 
             modelBuilder.Entity("EFCoreMovies.Entities.Log", b =>

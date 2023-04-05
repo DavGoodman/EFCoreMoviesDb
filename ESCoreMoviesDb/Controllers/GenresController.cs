@@ -22,18 +22,42 @@ namespace ESCoreMoviesDb.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Genre>> Get(/*int page = 1, int recordsToTake = 2*/) 
+        public async Task<IEnumerable<Genre>> Get(/*int page = 1, int recordsToTake = 2*/)
         {
+            context.Logs.Add(new Log { Message = "Executing Get from GenresController" });
+            await context.SaveChangesAsync();
+
             //return await context.Genres.ToListAsync();
             return await context.Genres/*.AsNoTracking()*/
-                .OrderBy(g => g.Name)
+                .OrderByDescending(g => EF.Property<DateTime>(g, "CreatedDate"))
                 //.Paginate(page, recordsToTake)
                 .ToListAsync();
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Genre>> Get(int id)
+        {
+            var genre = await context.Genres.FirstOrDefaultAsync(p => p.Id == id);
+            if (genre is null) return NotFound();
+
+            var createdDate = context.Entry(genre).Property<DateTime>("CreatedDate").CurrentValue;
+            return Ok(new
+            {
+                Id = genre.Id,
+                Name = genre.Name,
+                CreatedDate = createdDate
+            });
         }
 
         [HttpPost]
         public async Task<ActionResult> Post(GenreCreationDTO genreCreationDto)
         {
+            var genreExists = await context.Genres.AnyAsync(g => g.Name == genreCreationDto.Name);
+            if (genreExists)
+            {
+                return BadRequest($"The genre with the name {genreCreationDto.Name} already exists");
+            } 
+
             var genre = mapper.Map<Genre>(genreCreationDto);
 
             context.Add(genre); // marking genre as added
